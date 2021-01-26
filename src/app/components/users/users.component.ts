@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
 import {User} from '../../models/User';
-import {UserService} from '../../services/user.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-users',
@@ -12,20 +11,11 @@ export class UsersComponent implements OnInit {
 
   users: User[];
 
-  chosenOne: User;
-
-  constructor(private userService: UserService) {
+  constructor(private activatedRoute: ActivatedRoute) {
+    console.log(this.activatedRoute.data.subscribe(value => this.users = value.usersData));
   }
 
   ngOnInit(): void {
-    this.userService.getAllUsers().subscribe(value => this.users = value);
-
-  }
-
-  getBubbleUser(user: User): void {
-    console.log(user);
-    this.chosenOne = user;
-
   }
 
 }
