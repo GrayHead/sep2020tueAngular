@@ -1,0 +1,37 @@
+<!--<form #myForm='ngForm' (ngSubmit)="checkForm(myForm)">-->
+<!--  <input [(ngModel)]="user.name" [name]="'name'">-->
+<!--  <input [(ngModel)]="user.age" [name]="'age'">-->
+<!--  <button>save</button>-->
+<!--</form>-->
+
+
+<form [formGroup]="myForm" (ngSubmit)="action()">
+  <div>
+    <input [formControl]="name">
+
+    <div [classList]="['warning']"
+         *ngIf="name.errors?.required">
+      this is required input
+    </div>
+    <div [class]="'warning'"
+         *ngIf="!!name.errors?.minlength">
+      required length - {{name.errors?.minlength?.requiredLength }}
+      actual len - {{name.errors?.minlength?.actualLength}}
+    </div>
+    <div [class]="['warning']"
+         *ngIf="name.errors?.fukc">
+      {{name.errors?.msg}}
+
+
+    </div>
+
+  </div>
+  <div>
+    <input
+      type="number"
+      [formControl]="age">
+  </div>
+
+  <button>save</button>
+
+</form>
